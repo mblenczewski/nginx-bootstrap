@@ -7,6 +7,8 @@ export LOGS="${ROOT}/logs"
 export MAKEFLAGS="-j$(nproc --all)"
 
 export USE_LIBRESSL='true'
+
+export NGINX_PREFIX="/usr/local/nginx"
 export NGINX_USER=root
 export NGINX_GROUP=root
 
@@ -127,8 +129,6 @@ EXTRACT "LIBRESSL" LIBRESSL "libressl"
 
 NGINX () {
 	echo "Extracted NGINX!"
-
-	local NGINX_PREFIX="/usr/local/nginx"
 
 	local INCLUDED_MODULES=(\
 		--with-http_v2_module \
