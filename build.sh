@@ -204,12 +204,10 @@ NGINX () {
 	[ -d "${NGINX_PREFIX}/sites-available" ] && rm -rf ${NGINX_PREFIX}/sites-available
 	mkdir ${NGINX_PREFIX}/sites-available
 	cp ${ROOT}/website.conf ${NGINX_PREFIX}/sites-available
-	ln -s ${NGINX_PREFIX}/sites-available ${NGINX_PREFIX}/conf/sites-available
 
 	[ -d "${NGINX_PREFIX}/sites-enabled" ] && rm -rf ${NGINX_PREFIX}/sites-enabled
 	mkdir ${NGINX_PREFIX}/sites-enabled
 	ln -s ${NGINX_PREFIX}/sites-available/website.conf ${NGINX_PREFIX}/sites-enabled/website.conf
-	ln -s ${NGINX_PREFIX}/sites-available ${NGINX_PREFIX}/conf/sites-enabled
 
 	cp ${ROOT}/dhparam.pem /etc/ssl/dhparam.pem
 }
