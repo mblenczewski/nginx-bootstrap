@@ -4,7 +4,6 @@
 export ROOT=$(pwd)
 export SOURCES="${ROOT}/src"
 export LOGS="${ROOT}/logs"
-export MAKEFLAGS="-j$(nproc --all)"
 
 export USE_LIBRESSL='true'
 
@@ -88,8 +87,8 @@ EXTRACT () {
 DEFINE "ZLIB"		"1.2.11" 	"gz"		"zlib-"		"zlib-"
 DEFINE "PCRE"		"8.44"		"gz"		"pcre-"		"pcre-"
 DEFINE "OPENSSL"	"1.1.1h"	"gz"		"openssl-"	"openssl-"
-DEFINE "LIBRESSL"	"3.2.1"		"gz"		"libressl-"	"libressl-"
-DEFINE "NGINX"		"1.19.0"	"gz"		"nginx-"	"nginx-"
+DEFINE "LIBRESSL"	"3.2.2"		"gz"		"libressl-"	"libressl-"
+DEFINE "NGINX"		"1.19.4"	"gz"		"nginx-"	"nginx-"
 
 
 ## Downloading package sources
@@ -143,9 +142,6 @@ NGINX () {
 	)
 
 	local EXCLUDED_MODULES=(\
-		--without-http_fastcgi_module \
-		--without-http_scgi_module \
-		--without-http_uwsgi_module \
 		--without-http_grpc_module \
 		--without-http_empty_gif_module \
 	)
