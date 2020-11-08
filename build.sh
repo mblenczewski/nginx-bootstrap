@@ -8,8 +8,8 @@ export LOGS="${ROOT}/logs"
 export USE_LIBRESSL='true'
 
 export NGINX_PREFIX="/usr/local/nginx"
-export NGINX_USER=root
-export NGINX_GROUP=root
+export NGINX_USER=nginx
+export NGINX_GROUP=nginx
 
 
 ## Creating directory structure
@@ -192,24 +192,22 @@ NGINX () {
 
 	make && make install
 
-	cp ${ROOT}/nginx.service /lib/systemd/system/nginx.service
-
 	mv ${NGINX_PREFIX}/conf/nginx.conf ${NGINX_PREFIX}/conf/nginx.conf.bak
-	cp ${ROOT}/nginx.conf ${NGINX_PREFIX}/conf/nginx.conf
+	cp ${ROOT}/conf/nginx.conf ${NGINX_PREFIX}/conf/nginx.conf
 
 	[ -d "${NGINX_PREFIX}/conf/snippets" ] && rm -rf ${NGINX_PREFIX}/conf/snippets
 	mkdir ${NGINX_PREFIX}/conf/snippets
-	cp ${ROOT}/nginx-conf-snippets/* ${NGINX_PREFIX}/conf/snippets
+	cp ${ROOT}/conf/nginx-conf-snippets/* ${NGINX_PREFIX}/conf/snippets
 
 	[ -d "${NGINX_PREFIX}/sites-available" ] && rm -rf ${NGINX_PREFIX}/sites-available
 	mkdir ${NGINX_PREFIX}/sites-available
-	cp ${ROOT}/website.conf ${NGINX_PREFIX}/sites-available
+	cp ${ROOT}/conf/website.conf ${NGINX_PREFIX}/sites-available
 
 	[ -d "${NGINX_PREFIX}/sites-enabled" ] && rm -rf ${NGINX_PREFIX}/sites-enabled
 	mkdir ${NGINX_PREFIX}/sites-enabled
 	ln -s ${NGINX_PREFIX}/sites-available/website.conf ${NGINX_PREFIX}/sites-enabled/website.conf
 
-	cp ${ROOT}/dhparam.pem /etc/ssl/dhparam.pem
+	cp ${ROOT}/conf/dhparam.pem /etc/ssl/dhparam.pem
 }
 EXTRACT "NGINX" NGINX "nginx"
 

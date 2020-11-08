@@ -1,0 +1,6 @@
+#!/bin/sh
+
+/usr/local/nginx/sbin/nginx -t
+
+exec 2>&1
+exec chpst -P -u nginx:nginx /usr/local/nginx/sbin/nginx
